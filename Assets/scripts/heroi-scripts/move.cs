@@ -6,9 +6,10 @@ public class HeroiAndarCodigo : MonoBehaviour
 {
     public bool face = true;
 
-    public transform heroiT;
+    public Transform heroiT;
 
     public float vel = 2.5f;
+    public float force = 5f;
 
     public Rigidbody2D heroiRB;
 
@@ -16,7 +17,7 @@ public class HeroiAndarCodigo : MonoBehaviour
    
     void Start()
     {
-        heroiT = GetComponent<transform> ();
+        heroiT = GetComponent<Transform> ();
         heroiRB = GetComponent<Rigidbody2D> ();
     }
 
@@ -33,40 +34,42 @@ public class HeroiAndarCodigo : MonoBehaviour
         }
         if(Input.GetKey(KeyCode.RightArrow))
         {
-            transform.translate(new Vector2(vel * Time.deltaTime,0));
+            transform.Translate(new Vector2(vel * Time.deltaTime,0));
         }
 
         if(Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.translate(new Vector2(-vel * Time.deltaTime,0));
+            transform.Translate(new Vector2(-vel * Time.deltaTime,0));
         }
-        if(Input.GetKeyDown(KeyCode.Space)){}
+        if(Input.GetKeyDown(KeyCode.Space) && liberapulo == true )
+        {
+            heroiRB.AddForce(new Vector2(0, force), ForceMode2D.Impulse);
+        }
     }
     void flip ()
     {
-       face = !face;
+       face = !face;    
 
-       Vector3 scala = heroiT.localscale;
+       Vector3 scala = heroiT.localScale;
 
        scala.x *= -1;
 
-       heroiT.localscale = scala;
+       heroiT.localScale = scala;
     }
-    voidOnCollisionEnter2D(Collision2D outro)
+    void OnCollisionEnter2D(Collision2D outro)
     {
-        if(outro.gameObject.Comparetag("chao"))
+        if (outro.gameObject.CompareTag("chao"))
     
         {
             liberapulo = true;
         }
     }
-    voidOnCollisionExit2D(Collision2D outro)
+    void OnCollisionExit2D(Collision2D outro)
     {
-        if(outro.gameObject.Comparetag("chao"))
+        if (outro.gameObject.CompareTag("chao"))
     
         {
             liberapulo = false;
         }
     }
-    
 }
