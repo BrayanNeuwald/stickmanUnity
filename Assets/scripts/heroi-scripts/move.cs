@@ -40,6 +40,7 @@ public class HeroiAndarCodigo : MonoBehaviour
         {
             transform.translate(new Vector2(-vel * Time.deltaTime,0));
         }
+        if(Input.GetKeyDown(KeyCode.Space)){}
     }
     void flip ()
     {
@@ -51,5 +52,21 @@ public class HeroiAndarCodigo : MonoBehaviour
 
        heroiT.localscale = scala;
     }
-    void onco
+    voidOnCollisionEnter2D(Collision2D outro)
+    {
+        if(outro.gameObject.Comparetag("chao"))
+    
+        {
+            liberapulo = true;
+        }
+    }
+    voidOnCollisionExit2D(Collision2D outro)
+    {
+        if(outro.gameObject.Comparetag("chao"))
+    
+        {
+            liberapulo = false;
+        }
+    }
+    
 }
